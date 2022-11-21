@@ -52,10 +52,12 @@ ENDFORM.
 
 FORM zf_imprime_dados.
 
+  SORT: tg_makt BY matnr. "SORT ordena os blocos
+
   LOOP AT tg_mara INTO wg_mara.
 
-    READ TABLE tg_makt INTO wg_makt WITH KEY matnr = wg_mara-matnr. 
-
+    READ TABLE tg_makt INTO wg_makt WITH KEY matnr = wg_mara-matnr BINARY SEARCH.
+    "para usar o BINARY SEARCH é necessario usar o SORT antes.
     WRITE: / wg_makt-matnr,
              wg_makt-maktx,
              wg_mara-ernam.
@@ -63,6 +65,6 @@ FORM zf_imprime_dados.
     CLEAR: wg_mara,
            wg_makt.
 
-  endloop.
+  ENDLOOP.
 
 ENDFORM.
