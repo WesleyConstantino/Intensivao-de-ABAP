@@ -18,7 +18,6 @@ TYPES: BEGIN OF ty_mara,
          maktx TYPE makt-maktx,
        END OF ty_makt.
 
-DATA: vg_matnr TYPE mara-matnr.
 
 DATA: tg_mara TYPE TABLE OF ty_mara,
       tg_makt TYPE TABLE OF ty_makt.
