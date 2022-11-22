@@ -56,9 +56,9 @@ FORM zf_imprime_dados.
   SORT: tg_makt BY matnr. "SORT ordena os blocos
 
   FORMAT COLOR COL_BACKGROUND.
-  WRITE:/ sy-uline(70).
+  WRITE:/ sy-uline(70). "(70) define o tamanho da linha
   WRITE:/   sy-vline,
-       (20) 'Nº do material' COLOR COL_POSITIVE, sy-vline,
+       (20) 'Nº do material' COLOR COL_POSITIVE, sy-vline,  "(20) define o espaço que o texto ocupará
        (20) 'Texto breve de material' COLOR COL_POSITIVE, sy-vline,
        (20) 'Nome do responsável que criou o objeto' COLOR COL_POSITIVE, sy-vline.
 
@@ -68,9 +68,9 @@ FORM zf_imprime_dados.
     READ TABLE tg_makt INTO wg_makt WITH KEY matnr = wg_mara-matnr BINARY SEARCH.
     "para usar o BINARY SEARCH é necessario usar o SORT antes.
 
-  WRITE:/ sy-uline(70).
-    WRITE: / sy-vline,
-            (20) wg_makt-matnr COLOR COL_TOTAL, sy-vline,
+    WRITE:/ sy-uline(70). "sy-uline faz uma linha horizontal
+    WRITE: / sy-vline,    "sy-vline faz uma linha vertical
+            (20) wg_makt-matnr COLOR COL_TOTAL, sy-vline,  "COLOR define a cor da linha
             (20) wg_makt-maktx COLOR COL_HEADING, sy-vline,
             (20) wg_mara-ernam COLOR COL_NEGATIVE, sy-vline.
 
