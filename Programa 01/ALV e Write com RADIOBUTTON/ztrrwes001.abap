@@ -101,8 +101,7 @@ START-OF-SELECTION.
 *                            PERFORMS:                                 *
 *                 zf_seleciona_dados e zf_imprime_dados                *
 *&---------------------------------------------------------------------*
-  PERFORM: zf_seleciona_dados,
-           zf_imprime_dados.
+  PERFORM: zf_seleciona_dados,         
 
   IF rb1 = rbselected.
     PERFORM zf_imprime_dados.
