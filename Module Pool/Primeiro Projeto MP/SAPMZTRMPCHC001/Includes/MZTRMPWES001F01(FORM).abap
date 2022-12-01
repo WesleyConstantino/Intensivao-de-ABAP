@@ -69,6 +69,7 @@ FORM zf_cadastro_aluguel.
              wa_cad_automoveis,
              wa_aluguel_automovel.
     WHEN 'ENTER'.
+      PERFORM zf_calcula_valor_9003.
       PERFORM zf_selciona_cli_9003.
   ENDCASE.
 ENDFORM.
@@ -352,10 +353,10 @@ ENDFORM.
 *----------------------------------------------------------------------*
 *FAZ O CALCULO DO VALOR FINAL DO ALUGUEL NA TELA 9003
 FORM zf_calcula_valor_9003.
-  DATA: vl_dias  TYPE  ztrtwes004-datafim,
+  DATA: vl_dias  TYPE  i,
         vl_valor TYPE  ztrtwes004-valor.
 
-  vl_dias = ( wa_aluguel_automovel-datainicio - wa_aluguel_automovel-datafim ).
+  vl_dias = (  wa_aluguel_automovel-datafim - wa_aluguel_automovel-datainicio ).
   vl_valor = ( vl_dias * wa_cad_automoveis-valor ).
 
 wa_aluguel_automovel-valor = vl_valor.
