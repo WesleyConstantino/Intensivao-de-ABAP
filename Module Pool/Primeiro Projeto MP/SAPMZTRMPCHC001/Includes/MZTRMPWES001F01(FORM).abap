@@ -31,50 +31,6 @@ FORM zf_popup.
 ENDFORM.
 
 *&---------------------------------------------------------------------*
-*       Form zf_cadastra_cli
-*----------------------------------------------------------------------*
-*CADASTRA CLIENTE
-FORM zf_cadastra_cli.
-  CASE ok_code.
-    WHEN 'EXIT'.
-      LEAVE PROGRAM. "ABANDONA PROGRAMA
-    WHEN 'BACK' OR 'CANCEL'.
-      CLEAR wa_clientes.
-      LEAVE TO SCREEN 0.
-    WHEN 'GRAVAR'.
-      PERFORM zf_grava.
-    WHEN 'BT_LIMPAR'.
-      PERFORM zf_popup.
-      PERFORM zf_oculta_bt_alt.
-  ENDCASE.
-ENDFORM.
-
-*&---------------------------------------------------------------------*
-*       Form zzf_cadastro_aluguel
-*----------------------------------------------------------------------*
-*CADASTRO DE ALUGUEL da TELA 9003
-FORM zf_cadastro_aluguel.
-  CASE ok_code.
-    WHEN 'EXIT'.
-      LEAVE PROGRAM. "ABANDONA PROGRAMA
-    WHEN 'BACK' OR 'CANCEL'.
-      CLEAR: wa_clientes,
-             wa_cad_automoveis,
-             wa_aluguel_automovel.
-      LEAVE TO SCREEN 0.
-    WHEN 'GRAVAR'.
-      PERFORM zf_grava_aluguel.
-    WHEN 'LIMPAR'.
-      CLEAR: wa_clientes,
-             wa_cad_automoveis,
-             wa_aluguel_automovel.
-    WHEN 'ENTER'.
-      PERFORM zf_calcula_valor_9003.
-      PERFORM zf_selciona_cli_9003.
-  ENDCASE.
-ENDFORM.
-
-*&---------------------------------------------------------------------*
 *       Form zf_oculta_bt_alt
 *----------------------------------------------------------------------*
 *OCULTA BOTÃO "ALTERAR"
@@ -182,74 +138,24 @@ FORM zf_selciona_cli_9003.
 
 ENDFORM.
 
-
 *&---------------------------------------------------------------------*
-*       Form zf_consulta_cli
+*       Form zf_select_9002
 *----------------------------------------------------------------------*
-*CONSULTA CLIENTE
-FORM zf_consulta_cli.
-
-  CASE ok_code.
-    WHEN 'EXIT'.
-      LEAVE PROGRAM. "ABANDONA PROGRAMA
-
-    WHEN 'BACK' OR 'CANCEL'.
-      CLEAR wa_clientes.
-      LEAVE TO SCREEN 0. "Para chamar a telaLEAVE TO SCREEN 0.
-
-    WHEN 'CONSULTAR'.
-      IF wa_clientes-cpfcli IS INITIAL AND
-         wa_clientes-rgcli IS INITIAL AND
-         wa_clientes-codcli IS INITIAL.
-        MESSAGE s398(00) WITH text-m03 DISPLAY LIKE 'E'.
-      ELSE.
-        SELECT SINGLE *
-          FROM ztrtwes001
-          INTO CORRESPONDING FIELDS OF wa_clientes
-          WHERE cpfcli = wa_clientes-cpfcli
-          OR    rgcli  = wa_clientes-rgcli
-          OR    codcli = wa_clientes-codcli.
-
-        IF  sy-subrc EQ 0.
-          CALL SCREEN 9001.
-
-        ELSE.
-          MESSAGE s398(00) WITH text-m01 DISPLAY LIKE 'E'. "mensagem de erro
-
-        ENDIF.
-      ENDIF.
-
-  ENDCASE.
-
+*SELECT DA TELA 9002
+FORM zf_select_9002.
+  SELECT SINGLE *
+           FROM ztrtwes001
+           INTO CORRESPONDING FIELDS OF wa_clientes
+           WHERE cpfcli = wa_clientes-cpfcli
+           OR    rgcli  = wa_clientes-rgcli
+           OR    codcli = wa_clientes-codcli.
+  IF  sy-subrc EQ 0.
+    CALL SCREEN 9001.
+  ELSE.
+    MESSAGE s398(00) WITH text-m01 DISPLAY LIKE 'E'. "mensagem de erro
+  ENDIF.
 ENDFORM.
 
-*&---------------------------------------------------------------------*
-*       Form zf_tela_inicial
-*----------------------------------------------------------------------*
-*Botões da tela 9000
-FORM zf_tela_inicial.
-
-  CASE ok_code.
-    WHEN 'EXIT'.
-      LEAVE PROGRAM. "ABANDONA PROGRAMA
-    WHEN 'CAD_CLIENTES'.
-      PERFORM zf_gera_cod_autmatico.  "Reflete na tela referenciada; nesse caso a 9001
-      CALL SCREEN 9001."Para chamar a tela.
-    WHEN 'BACK' OR 'CANCEL'.
-      CLEAR wa_clientes.
-      LEAVE TO SCREEN 0.  "Para chamar a telaLEAVE TO SCREEN 0.
-    WHEN 'CONSULTAR'.
-      CALL SCREEN 9002.
-    WHEN 'CAD_ALUGUEL'.
-      PERFORM zf_gera_cod_autmatico_9003.
-      CALL SCREEN 9003.
-    WHEN 'CAD_AUTOMOVEL'.
-      CALL TRANSACTION 'ZTRWES002'.
-    WHEN 'CAD_MARCA'.
-      CALL TRANSACTION 'ZTRWES001'.
-  ENDCASE.
-
-ENDFORM.
 
 *&---------------------------------------------------------------------*
 *       Form zf_gera_cod_autmatico
@@ -361,7 +267,7 @@ FORM zf_calcula_valor_9003.
 
   wa_aluguel_automovel-valor = vl_valor.
 
-  IF RB_COM_DESCONTO = 'X' AND wa_aluguel_automovel-valor IS NOT INITIAL.
+  IF rb_com_desconto = 'X' AND wa_aluguel_automovel-valor IS NOT INITIAL.
     PERFORM zf_calcula_desconto_9003.
   ENDIF.
 
