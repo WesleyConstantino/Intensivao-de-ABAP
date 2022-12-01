@@ -74,7 +74,7 @@ FORM zf_selciona_cli_9003.
       WHERE codcli = wa_clientes-codcli.
   ENDIF.
 
-  IF wa_clientes IS NOT INITIAL.
+  IF wa_cad_automoveis IS NOT INITIAL.
     SELECT SINGLE *
       INTO wa_cad_automoveis FROM ztrtwes002
       WHERE placa = wa_cad_automoveis-placa.
