@@ -136,7 +136,7 @@ ENDFORM.
 *OCULTA CAMPOS DA TELA 9003
 FORM zf_oculta_campos_9003.
 
-  IF ok_code EQ 'CAD_ALUGUEL'.
+  IF ok_code <> 'ATUALIZAR'. .
     LOOP AT SCREEN.
       CASE screen-name.
         WHEN 'BT_01'.
