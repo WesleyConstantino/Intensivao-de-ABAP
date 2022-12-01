@@ -31,62 +31,6 @@ FORM zf_popup.
 ENDFORM.
 
 *&---------------------------------------------------------------------*
-*       Form zf_oculta_bt_alt
-*----------------------------------------------------------------------*
-*OCULTA BOTÃO "ALTERAR"
-FORM zf_oculta_bt_alt.
-
-  IF ok_code NE 'CONSULTAR'.
-    LOOP AT SCREEN.
-      CASE screen-name.
-        WHEN 'BT_ALTERAR'.
-          screen-input = 0.
-          MODIFY SCREEN.
-      ENDCASE.
-    ENDLOOP.
-  ENDIF.
-ENDFORM.
-
-*&---------------------------------------------------------------------*
-*       Form zf_oculta_campos
-*----------------------------------------------------------------------*
-*OCULTA CAMPOS DA TELA 9001
-FORM zf_oculta_campos.
-
-  IF ok_code EQ 'CONSULTAR'. "O ok_code é sempre da tela anterior; a que chama a acção. Nesse caso a 9000
-
-    LOOP AT SCREEN.
-      CASE screen-name.
-        WHEN 'BT_01'.
-          screen-input = 0.
-        WHEN 'WA_CLIENTES-NOMECLI'.
-          screen-input = 0.
-        WHEN 'WA_CLIENTES-RGCLI'.
-          screen-input = 0.
-        WHEN 'WA_CLIENTES-CPFCLI'.
-          screen-input = 0.
-        WHEN 'WA_CLIENTES-DATANASC'.
-          screen-input = 0.
-        WHEN 'WA_CLIENTES-RUACLI'.
-          screen-input = 0.
-        WHEN 'WA_CLIENTES-BAIRROCLI'.
-          screen-input = 0.
-        WHEN 'WA_CLIENTES-CIDADECLI'.
-          screen-input = 0.
-        WHEN 'WA_CLIENTES-CEPCLI'.
-          screen-input = 0.
-        WHEN 'WA_CLIENTES-SEXCLI'.
-          screen-input = 0.
-        WHEN 'BT_LIMPAR'.
-          screen-input = 0.
-      ENDCASE.
-      MODIFY SCREEN.
-    ENDLOOP.
-  ENDIF.
-
-ENDFORM.
-
-*&---------------------------------------------------------------------*
 *       Form zf_oculta_campos_9003
 *----------------------------------------------------------------------*
 *OCULTA CAMPOS DA TELA 9003
@@ -156,6 +100,23 @@ FORM zf_select_9002.
   ENDIF.
 ENDFORM.
 
+*&---------------------------------------------------------------------*
+*       Form zf_select_9004
+*----------------------------------------------------------------------*
+*SELECT DA TELA 9004
+FORM zf_select_9004.
+  SELECT SINGLE *
+           FROM ztrtwes004
+           INTO CORRESPONDING FIELDS OF wa_aluguel_automovel
+           WHERE placa = wa_cad_automoveis-placa
+           OR    codalu  = wa_aluguel_automovel-codalu
+           OR    codcli = wa_clientes-codcli.
+  IF  sy-subrc EQ 0.
+    CALL SCREEN 9003.
+  ELSE.
+    MESSAGE s398(00) WITH text-m01 DISPLAY LIKE 'E'. "mensagem de erro
+  ENDIF.
+ENDFORM.
 
 *&---------------------------------------------------------------------*
 *       Form zf_gera_cod_autmatico
@@ -287,4 +248,21 @@ FORM zf_calcula_desconto_9003.
   vl_desconto =  wa_aluguel_automovel-valor / 10 .
   wa_aluguel_automovel-valor = wa_aluguel_automovel-valor - vl_desconto.
 
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*       Form zf_oculta_bt_alt
+*----------------------------------------------------------------------*
+*OCULTA BOTÃO "ALTERAR"
+FORM zf_oculta_bt_alt.
+
+  IF ok_code NE 'CONSULTAR' OR ok_code NE 'BT_CONSULTAR'.
+    LOOP AT SCREEN.
+      CASE screen-name.
+        WHEN 'BT_ALTERAR'.
+          screen-input = 0.
+          MODIFY SCREEN.
+      ENDCASE.
+    ENDLOOP.
+  ENDIF.
 ENDFORM.
