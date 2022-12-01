@@ -359,6 +359,22 @@ FORM zf_calcula_valor_9003.
   vl_dias = (  wa_aluguel_automovel-datafim - wa_aluguel_automovel-datainicio ).
   vl_valor = ( vl_dias * wa_cad_automoveis-valor ).
 
-wa_aluguel_automovel-valor = vl_valor.
+  wa_aluguel_automovel-valor = vl_valor.
+
+  IF RB_COM_DESCONTO = 'X' AND wa_aluguel_automovel-valor IS NOT INITIAL.
+    PERFORM zf_calcula_desconto_9003.
+  ENDIF.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*       Form zf_calcula_desconto_9003
+*----------------------------------------------------------------------*
+*FAZ O CALCULO DO DE 10% DO RADIO BUTTON NO ALUGUEL NA TELA 9003
+FORM zf_calcula_desconto_9003.
+  DATA: vl_desconto TYPE ztrtwes004-valor.
+
+  vl_desconto =  wa_aluguel_automovel-valor / 10 .
+  wa_aluguel_automovel-valor = wa_aluguel_automovel-valor - vl_desconto.
 
 ENDFORM.
