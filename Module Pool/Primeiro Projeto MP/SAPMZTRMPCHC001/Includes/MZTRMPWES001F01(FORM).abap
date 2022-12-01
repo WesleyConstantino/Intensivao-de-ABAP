@@ -231,6 +231,10 @@ ENDFORM.
 *----------------------------------------------------------------------*
 *Verifica se há campos vazios solicitar um aluguel, senão, grava. Tela 9003
 FORM zf_grava_aluguel.
+  wa_aluguel_automovel-chassi = wa_cad_automoveis-chassi.
+  wa_aluguel_automovel-codcli = wa_clientes-codcli.
+  wa_aluguel_automovel-placa = wa_cad_automoveis-placa.
+
 
   IF wa_aluguel_automovel-codalu IS INITIAL AND
          wa_aluguel_automovel-datainicio IS INITIAL AND
