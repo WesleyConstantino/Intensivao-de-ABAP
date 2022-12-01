@@ -23,6 +23,8 @@ MODULE user_command_9000 INPUT.
       LEAVE TO SCREEN 0.  "Para chamar a telaLEAVE TO SCREEN 0.
     WHEN 'CONSULTAR'.
       CALL SCREEN 9002.
+    WHEN 'EXIBE_ALUGUEL'.
+      CALL SCREEN 9004.
     WHEN 'CAD_ALUGUEL'.
       PERFORM zf_gera_cod_autmatico_9003.
       CALL SCREEN 9003.
@@ -40,7 +42,7 @@ ENDMODULE.
 *AÇÃO DOS BOTÕES 9001
 MODULE user_command_9001 INPUT.
 
-    CASE ok_code.
+  CASE ok_code.
     WHEN 'EXIT'.
       LEAVE PROGRAM. "ABANDONA PROGRAMA
     WHEN 'BACK' OR 'CANCEL'.
@@ -61,7 +63,7 @@ ENDMODULE.
 *AÇÃO DOS BOTÕES 9002
 MODULE user_command_9002 INPUT.
 
-    CASE ok_code.
+  CASE ok_code.
     WHEN 'EXIT'.
       LEAVE PROGRAM. "ABANDONA PROGRAMA
     WHEN 'BACK' OR 'CANCEL'.
@@ -102,6 +104,32 @@ MODULE user_command_9003 INPUT.
     WHEN 'ENTER'.
       PERFORM zf_calcula_valor_9003.
       PERFORM zf_selciona_cli_9003.
+  ENDCASE.
+
+ENDMODULE.
+
+*&---------------------------------------------------------------------*
+*       Tela 9004
+*----------------------------------------------------------------------*
+*AÇÃO DOS BOTÕES 9004
+MODULE user_command_9004 INPUT.
+
+  CASE ok_code.
+    WHEN 'EXIT'.
+      LEAVE PROGRAM. "ABANDONA PROGRAMA
+    WHEN 'BACK' OR 'CANCEL'.
+      CLEAR: wa_clientes,
+             wa_cad_automoveis,
+             wa_aluguel_automovel.
+      LEAVE TO SCREEN 0.
+    WHEN 'BT_CONSULTAR'.
+      IF wa_cad_automoveis-placa IS INITIAL AND
+         wa_aluguel_automovel-codalu IS INITIAL AND
+         wa_clientes-codcli IS INITIAL.
+        MESSAGE s398(00) WITH text-m03 DISPLAY LIKE 'E'.
+      ELSE.
+        PERFORM zf_select_9004.
+      ENDIF.
   ENDCASE.
 
 ENDMODULE.
