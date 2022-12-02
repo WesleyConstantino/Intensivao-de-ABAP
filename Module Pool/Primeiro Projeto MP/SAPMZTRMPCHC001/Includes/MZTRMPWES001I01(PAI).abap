@@ -100,7 +100,11 @@ MODULE user_command_9003 INPUT.
     WHEN 'LIMPAR'.
       CLEAR: wa_clientes,
              wa_cad_automoveis,
-             wa_aluguel_automovel.
+             wa_aluguel_automovel-datafim,
+             wa_aluguel_automovel-datainicio,
+             wa_aluguel_automovel-horainicio,
+             wa_aluguel_automovel-horafim,
+             wa_aluguel_automovel-valor.
     WHEN 'ENTER'.
       PERFORM zf_calcula_valor_9003.
       PERFORM zf_selciona_cli_9003.
