@@ -81,6 +81,9 @@ START-OF-SELECTION.
   PERFORM zf_select.
   PERFORM zf_exibe_alv_poo.
 
+*&---------------------------------------------------------------------*
+*                      FORM zf_select                            *
+*&---------------------------------------------------------------------*
 FORM zf_select.
 
   SELECT ztrtwes004~codalu
