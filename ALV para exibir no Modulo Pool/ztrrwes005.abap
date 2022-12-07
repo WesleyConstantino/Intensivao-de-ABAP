@@ -24,7 +24,7 @@ TABLES: ztrtwes004.
 *&---------------------------------------------------------------------*
 TYPES: BEGIN OF ty_saida,
          codalu     TYPE ztrtwes004-codalu,
-         codcli     TYPE ztrtwes001-codcli,
+         codcli     TYPE ztrtwes004-codcli,
          nomecli    TYPE ztrtwes001-nomecli,
          cpfcli     TYPE ztrtwes001-cpfcli,
          chassi     TYPE ztrtwes004-chassi,
@@ -54,8 +54,8 @@ DATA: wa_out    LIKE LINE  OF t_out,
 SELECTION-SCREEN BEGIN OF BLOCK b1 WITH FRAME TITLE text-t01.
 *Campos de entrada
 "PARAMETERS:
-SELECT-OPTIONS: p_codcli FOR ztrtwes004-codcli  NO-EXTENSION NO INTERVALS, "Campo 1
-                p_data   FOR ztrtwes004-datainicio NO-EXTENSION NO INTERVALS. "Campo 2
+SELECT-OPTIONS: p_codcli FOR ztrtwes004-codcli MODIF ID CLI, "Campo 1; MODIF ID modifica o nome desse campo; em vez de 001, agora ele se chama CLI
+                p_data   FOR ztrtwes004-datainicio. "Campo 002
 SELECTION-SCREEN BEGIN OF BLOCK b2 WITH FRAME TITLE text-t02.
 
 *Radio Buttons
@@ -119,7 +119,7 @@ ENDFORM.
 FORM zf_esconde_campo_cliente .
 
   LOOP AT SCREEN.
-    IF screen-group4 ='001'. "Campo 001 é o campo de Cliente da tela de seleção
+    IF screen-group4 ='CLI'. "Campo CLI é o campo de Cliente da tela de seleção
       screen-active = '0'.
     ENDIF.
     MODIFY SCREEN.
