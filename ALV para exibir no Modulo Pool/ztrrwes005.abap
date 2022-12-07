@@ -24,7 +24,7 @@ TABLES: ztrtwes004.
 *&---------------------------------------------------------------------*
 TYPES: BEGIN OF ty_saida,
          codalu     TYPE ztrtwes004-codalu,
-         codcli     TYPE ztrtwes004-codcli,
+         codcli     TYPE ztrtwes001-codcli,
          nomecli    TYPE ztrtwes001-nomecli,
          cpfcli     TYPE ztrtwes001-cpfcli,
          chassi     TYPE ztrtwes004-chassi,
