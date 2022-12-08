@@ -1,7 +1,6 @@
 PROCESS BEFORE OUTPUT. "PBO - Tratamento de tela
- MODULE STATUS_9001.
- MODULE OCULTA_DADOS.
- MODULE OCULTA_BOTAO.
+  MODULE status_9001.
+  MODULE oculta_dados.
 *
-PROCESS AFTER INPUT. "PAI - Ações do usuário
- MODULE USER_COMMAND_9001.
+ process after input. "PAI - Ações do usuário
+  MODULE user_command_9001.
