@@ -32,6 +32,10 @@ MODULE user_command_9000 INPUT.
       CALL TRANSACTION 'ZTRWES002'.
     WHEN 'CAD_MARCA'.
       CALL TRANSACTION 'ZTRWES001'.
+    WHEN 'BT_RELATORIOS'.
+      CALL TRANSACTION 'ZTRWES006'.
+      WHEN 'COD_ALU_CLI'.
+      CALL TRANSACTION 'ZTRTWESLEY'.
   ENDCASE.
 
 ENDMODULE.
@@ -109,6 +113,17 @@ MODULE user_command_9003 INPUT.
       PERFORM zf_calcula_valor_9003.
       PERFORM zf_selciona_cli_9003.
   ENDCASE.
+*Ação do radio button
+  CASE rb_com_desconto.
+    WHEN 'X'.
+      IF wa_aluguel_automovel-valor IS NOT INITIAL.
+        PERFORM zf_calcula_desconto_9003.
+      ENDIF.
+    WHEN ' '.
+      IF wa_aluguel_automovel-valor IS NOT INITIAL.
+        PERFORM zf_calcula_valor_9003.
+      ENDIF.
+  ENDCASE.
 
 ENDMODULE.
 
@@ -127,9 +142,7 @@ MODULE user_command_9004 INPUT.
              wa_aluguel_automovel.
       LEAVE TO SCREEN 0.
     WHEN 'BT_CONSULTAR'.
-      IF wa_cad_automoveis-placa IS INITIAL AND
-         wa_aluguel_automovel-codalu IS INITIAL AND
-         wa_clientes-codcli IS INITIAL.
+      IF  wa_aluguel_automovel-codalu IS INITIAL.
         MESSAGE s398(00) WITH text-m03 DISPLAY LIKE 'E'.
       ELSE.
         PERFORM zf_select_9004.
