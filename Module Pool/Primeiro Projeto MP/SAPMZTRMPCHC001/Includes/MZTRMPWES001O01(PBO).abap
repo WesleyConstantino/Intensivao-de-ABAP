@@ -60,11 +60,6 @@ MODULE oculta_dados OUTPUT.
   ENDIF.
 
 ENDMODULE.
-*OCULTA BOTÃO "ALTERAR" TELA 9001
-MODULE oculta_botao OUTPUT.
-  PERFORM zf_oculta_bt_alt.
-ENDMODULE.
-
 
 *&---------------------------------------------------------------------*
 *       tela 9002
