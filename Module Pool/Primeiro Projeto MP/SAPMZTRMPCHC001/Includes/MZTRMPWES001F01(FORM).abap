@@ -108,9 +108,7 @@ FORM zf_select_9004.
   SELECT SINGLE *
            FROM ztrtwes004
            INTO CORRESPONDING FIELDS OF wa_aluguel_automovel
-           WHERE placa = wa_cad_automoveis-placa
-           OR    codalu  = wa_aluguel_automovel-codalu
-           OR    codcli = wa_clientes-codcli.
+           WHERE codalu  = wa_aluguel_automovel-codalu.
   IF  sy-subrc EQ 0.
     CALL SCREEN 9003.
   ELSE.
@@ -232,10 +230,6 @@ FORM zf_calcula_valor_9003.
 
   wa_aluguel_automovel-valor = vl_valor.
 
-  IF rb_com_desconto = 'X' AND wa_aluguel_automovel-valor IS NOT INITIAL.
-    PERFORM zf_calcula_desconto_9003.
-  ENDIF.
-
 ENDFORM.
 
 *&---------------------------------------------------------------------*
@@ -243,10 +237,23 @@ ENDFORM.
 *----------------------------------------------------------------------*
 *FAZ O CALCULO DO DE 10% DO RADIO BUTTON NO ALUGUEL NA TELA 9003
 FORM zf_calcula_desconto_9003.
-  DATA: vl_desconto TYPE ztrtwes004-valor.
 
-  vl_desconto =  wa_aluguel_automovel-valor / 10 .
-  wa_aluguel_automovel-valor = wa_aluguel_automovel-valor - vl_desconto.
+"ANTERIORMENTE O CALCULO DO DESCONTO FOI FEITO ASSIM: Direto no FORM
+
+*  DATA: vl_desconto TYPE ztrtwes004-valor.
+
+*  vl_desconto =  wa_aluguel_automovel-valor / 10 .
+*  wa_aluguel_automovel-valor = wa_aluguel_automovel-valor - vl_desconto.
+*************************************************************************
+  CALL FUNCTION 'ZTRFWES001'
+    EXPORTING
+      valor_total        = wa_aluguel_automovel-valor
+    IMPORTING
+      valor_com_desconto = wa_aluguel_automovel-valor
+    EXCEPTIONS
+      msg_erro           = 1
+      OTHERS             = 2.
+
 
 ENDFORM.
 
