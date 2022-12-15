@@ -239,10 +239,10 @@ FORM zf_select.
 
   IF NOT t_vbrk IS INITIAL.
 
-   " LOOP AT t_vbrk INTO wa_vbrk.
-   "   wa_vbrk-vbeln_aux = wa_vbrk-vbeln.
-   "   MODIFY t_vbrk FROM wa_vbrk TRANSPORTING vbeln_aux.
-   " ENDLOOP.
+    LOOP AT t_vbrk INTO wa_vbrk.  "Loop para fazer a modificação no meu campo auxiliar
+      wa_vbrk-vbeln_aux = wa_vbrk-vbeln.
+      MODIFY t_vbrk FROM wa_vbrk TRANSPORTING vbeln_aux.
+    ENDLOOP.
 
 
     SELECT docnum
@@ -544,8 +544,7 @@ FORM zf_monta_t_out .
         wa_out-nfnum  = wa_j_1bnfdoc-nfnum.
         wa_out-parid  = wa_j_1bnfdoc-parid.
         wa_out-name1  = wa_j_1bnfdoc-name1.
-        WRITE wa_j_1bnfdoc-cgc USING EDIT MASK '__.___.___/____-__' TO wa_out-cgc.
-*        wa_out-cgc    = wa_j_1bnfdoc-cgc.
+        WRITE wa_j_1bnfdoc-cgc USING EDIT MASK '__.___.___/____-__' TO wa_out-cgc.  "Máscara para o campo do cnpj
       ENDIF.
     ENDIF.
 
@@ -580,7 +579,7 @@ FORM zf_monta_t_out .
       ELSE.
         wa_out-kbetr4 = wa_konv-kbetr.
         wa_out-sakn14 = wa_konv-sakn1.
-        "wa_out-somakbetr = wa_out-somakbetr + wa_konv-kbetr.
+        "wa_out-somakbetr = wa_out-somakbetr + wa_konv-kbetr. "Também posso fazer a soma aqui
       ENDIF.
        wa_out-kbetrs = wa_out-kbetr1 + wa_out-kbetr2 + wa_out-kbetr3 + wa_out-kbetr4.  "Soma
     ENDLOOP.
