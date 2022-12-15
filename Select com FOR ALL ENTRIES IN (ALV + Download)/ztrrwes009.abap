@@ -28,31 +28,31 @@ TYPES: BEGIN OF ty_download,
        END   OF ty_download,
 
        BEGIN OF ty_out,
-         name1  TYPE j_1bnfdoc-name1,
-         cgc(18)    TYPE c,
-         nfnum  TYPE j_1bnfdoc-nfnum,
-         parid  TYPE j_1bnfdoc-parid,
-         credat TYPE j_1bnfdoc-credat,
-         zfbdt  TYPE bseg-zfbdt,
-         bldat  TYPE bkpf-bldat,
-         dmbtr  TYPE bseg-dmbtr,
-         kbetr  TYPE konv-kbetr,
-         kbetrs TYPE konv-kbetr,
-         kbetr1 TYPE konv-kbetr,
-         kbetr2 TYPE konv-kbetr,
-         kbetr3 TYPE konv-kbetr,
-         kbetr4 TYPE konv-kbetr,
-         sakn11 TYPE konv-sakn1,
-         sakn12 TYPE konv-sakn1,
-         sakn13 TYPE konv-sakn1,
-         sakn14 TYPE konv-sakn1,
-         sgtxt  TYPE bseg-sgtxt,
-         pswbt  TYPE bseg-pswbt,
-         augbl  TYPE bseg-augbl,
-         augdt  TYPE bseg-augdt,
-         blart  TYPE bkpf-blart,
-         ltext  TYPE t003t-ltext,
-         hkont  TYPE bseg-hkont,
+         name1   TYPE j_1bnfdoc-name1,
+         cgc(18) TYPE c,
+         nfnum   TYPE j_1bnfdoc-nfnum,
+         parid   TYPE j_1bnfdoc-parid,
+         credat  TYPE j_1bnfdoc-credat,
+         zfbdt   TYPE bseg-zfbdt,
+         bldat   TYPE bkpf-bldat,
+         dmbtr   TYPE bseg-dmbtr,
+         kbetr   TYPE konv-kbetr,
+         kbetrs  TYPE konv-kbetr,
+         kbetr1  TYPE konv-kbetr,
+         kbetr2  TYPE konv-kbetr,
+         kbetr3  TYPE konv-kbetr,
+         kbetr4  TYPE konv-kbetr,
+         sakn11  TYPE konv-sakn1,
+         sakn12  TYPE konv-sakn1,
+         sakn13  TYPE konv-sakn1,
+         sakn14  TYPE konv-sakn1,
+         sgtxt   TYPE bseg-sgtxt,
+         pswbt   TYPE bseg-pswbt,
+         augbl   TYPE bseg-augbl,
+         augdt   TYPE bseg-augdt,
+         blart   TYPE bkpf-blart,
+         ltext   TYPE t003t-ltext,
+         hkont   TYPE bseg-hkont,
        END OF ty_out,
 
        BEGIN OF ty_out_aux,
@@ -329,10 +329,10 @@ FORM zf_select.
 
 
 
-ELSE.
-  MESSAGE s398(00) WITH 'Não há registros!' DISPLAY LIKE 'E'.
-  STOP.
-ENDIF.
+  ELSE.
+    MESSAGE s398(00) WITH 'Não há registros!' DISPLAY LIKE 'E'.
+    STOP.
+  ENDIF.
 
 ENDFORM.
 
@@ -351,10 +351,15 @@ FORM zf_exibe_alv_poo.
 
       lo_table->get_functions( )->set_all( abap_true ). "Ativar met codes
 
+*Mudar nome das colinas do ALV
       lo_table->get_columns( )->get_column( 'CGC' )->set_short_text( 'CNPJ' ).  "Mudar o texto curto da tabela
       lo_table->get_columns( )->get_column( 'CGC' )->set_medium_text( 'CNPJ' ). "Mudar o texto médio da tabela
       lo_table->get_columns( )->get_column( 'CGC' )->set_long_text( 'CNPJ' ).   "Mudar o texto longo da tabela
                                             "CGC é o nome do campo que desejo mudar na minha t_out
+
+      lo_table->get_columns( )->get_column( 'KBETRS' )->set_short_text( 'Soma' ).
+      lo_table->get_columns( )->get_column( 'KBETRS' )->set_medium_text( 'Soma' ).
+      lo_table->get_columns( )->get_column( 'KBETRS' )->set_long_text( 'Soma' ).
 
       CREATE OBJECT lo_header. "É necessário que criemos o objeto header
 
