@@ -55,38 +55,6 @@ TYPES: BEGIN OF ty_download,
          hkont   TYPE bseg-hkont,
        END OF ty_out,
 
-       BEGIN OF ty_out_aux,
-         vbeln     TYPE vbrk-vbeln,
-         vbeln_aux TYPE c LENGTH 35,
-         knumv     TYPE vbrk-knumv,
-         docnum    TYPE j_1bnflin-docnum,
-         name1     TYPE j_1bnfdoc-name1,
-         cgc       TYPE j_1bnfdoc-cgc,
-         nfnum     TYPE j_1bnfdoc-nfnum,
-         parid     TYPE j_1bnfdoc-parid,
-         credat    TYPE j_1bnfdoc-credat,
-         zfbdt     TYPE bseg-zfbdt,
-         bldat     TYPE bkpf-bldat,
-         dmbtr     TYPE bseg-dmbtr,
-         kbetr     TYPE konv-kbetr,
-         kbetrs    TYPE konv-kbetr,
-         kbetr1    TYPE konv-kbetr,
-         kbetr2    TYPE konv-kbetr,
-         kbetr3    TYPE konv-kbetr,
-         kbetr4    TYPE konv-kbetr,
-         sakn11    TYPE konv-sakn1,
-         sakn12    TYPE konv-sakn1,
-         sakn13    TYPE konv-sakn1,
-         sakn14    TYPE konv-sakn1,
-         sgtxt     TYPE bseg-sgtxt,
-         pswbt     TYPE bseg-pswbt,
-         augbl     TYPE bseg-augbl,
-         augdt     TYPE bseg-augdt,
-         blart     TYPE bkpf-blart,
-         ltext     TYPE t003t-ltext,
-         hkont     TYPE bseg-hkont,
-       END OF ty_out_aux,
-
        BEGIN OF ty_j_1bnflin,
          docnum TYPE j_1bnflin-docnum,
          refkey TYPE j_1bnflin-refkey,
@@ -156,8 +124,7 @@ DATA: t_vbrk      TYPE TABLE OF ty_vbrk,
       t_j_1bnfdoc TYPE TABLE OF ty_j_1bnfdoc,
       t_j_1bnflin TYPE TABLE OF ty_j_1bnflin,
       t_download  TYPE TABLE OF ty_download,
-      t_out       TYPE TABLE  OF ty_out,
-      t_out_aux   TYPE TABLE  OF ty_out_aux.
+      t_out       TYPE TABLE  OF ty_out.
 
 *&---------------------------------------------------------------------*
 *                            Workareas                                 *
@@ -170,7 +137,6 @@ DATA: wa_j_1bnflin LIKE LINE OF t_j_1bnflin,
       wa_bseg      LIKE LINE OF t_bseg,
       wa_j_1bnfdoc LIKE LINE OF t_j_1bnfdoc,
       wa_out       LIKE LINE OF t_out,
-      wa_out_aux   LIKE LINE OF t_out_aux,
       wa_download  LIKE LINE OF t_download.
 
 *&---------------------------------------------------------------------*
@@ -363,7 +329,7 @@ FORM zf_exibe_alv_poo.
 
       CREATE OBJECT lo_header. "É necessário que criemos o objeto header
 
-      lo_header->create_header_information( row = 1 column = 1 text = 'Relatório ALV' ). "Texto grande do header
+      lo_header->create_header_information( row = 1 column = 1 text = 'Tabela' ). "Texto grande do header
       lo_header->add_row( ).
 
 
