@@ -28,31 +28,31 @@ TYPES: BEGIN OF ty_download,
        END   OF ty_download,
 
        BEGIN OF ty_out,
-         name1     TYPE j_1bnfdoc-name1,
-         cgc       TYPE j_1bnfdoc-cgc,
-         nfnum     TYPE j_1bnfdoc-nfnum,
-         parid     TYPE j_1bnfdoc-parid,
-         credat    TYPE j_1bnfdoc-credat,
-         zfbdt     TYPE bseg-zfbdt,
-         bldat     TYPE bkpf-bldat,
-         dmbtr     TYPE bseg-dmbtr,
-         kbetr     TYPE konv-kbetr,
-         kbetrs    TYPE konv-kbetr,
-         kbetr1    TYPE konv-kbetr,
-         kbetr2    TYPE konv-kbetr,
-         kbetr3    TYPE konv-kbetr,
-         kbetr4    TYPE konv-kbetr,
-         sakn11    TYPE konv-sakn1,
-         sakn12    TYPE konv-sakn1,
-         sakn13    TYPE konv-sakn1,
-         sakn14    TYPE konv-sakn1,
-         sgtxt     TYPE bseg-sgtxt,
-         pswbt     TYPE bseg-pswbt,
-         augbl     TYPE bseg-augbl,
-         augdt     TYPE bseg-augdt,
-         blart     TYPE bkpf-blart,
-         ltext     TYPE t003t-ltext,
-         hkont     TYPE bseg-hkont,
+         name1  TYPE j_1bnfdoc-name1,
+         cgc(18)    TYPE c,
+         nfnum  TYPE j_1bnfdoc-nfnum,
+         parid  TYPE j_1bnfdoc-parid,
+         credat TYPE j_1bnfdoc-credat,
+         zfbdt  TYPE bseg-zfbdt,
+         bldat  TYPE bkpf-bldat,
+         dmbtr  TYPE bseg-dmbtr,
+         kbetr  TYPE konv-kbetr,
+         kbetrs TYPE konv-kbetr,
+         kbetr1 TYPE konv-kbetr,
+         kbetr2 TYPE konv-kbetr,
+         kbetr3 TYPE konv-kbetr,
+         kbetr4 TYPE konv-kbetr,
+         sakn11 TYPE konv-sakn1,
+         sakn12 TYPE konv-sakn1,
+         sakn13 TYPE konv-sakn1,
+         sakn14 TYPE konv-sakn1,
+         sgtxt  TYPE bseg-sgtxt,
+         pswbt  TYPE bseg-pswbt,
+         augbl  TYPE bseg-augbl,
+         augdt  TYPE bseg-augdt,
+         blart  TYPE bkpf-blart,
+         ltext  TYPE t003t-ltext,
+         hkont  TYPE bseg-hkont,
        END OF ty_out,
 
        BEGIN OF ty_out_aux,
@@ -311,8 +311,6 @@ FORM zf_select.
 
     ENDIF.
 
-    """""""""""""""""""""""""""""""""""""""""""""
-
     SELECT knumv
            kbetr
            sakn1
@@ -324,18 +322,17 @@ FORM zf_select.
     AND ( kschl = 'ZFE1' OR kschl = 'ZFE2'
     OR    kschl = 'ZFE3' OR kschl = 'ZFE4' ).
 
-    "SORT t_konv BY knumv
-    "               kschl.
-    "DELETE ADJACENT DUPLICATES FROM t_konv COMPARING knumv kschl. "Deletar as duplicidades de konv
+    SORT t_konv BY knumv
+                   kschl.
+    DELETE ADJACENT DUPLICATES FROM t_konv COMPARING knumv kschl. "Deletar as duplicidades de konv
 
 
-  ENDIF.
 
 
-  IF sy-subrc IS NOT INITIAL.
-    MESSAGE s398(00) WITH 'Não há registros!' DISPLAY LIKE 'E'.
-    STOP.
-  ENDIF.
+ELSE.
+  MESSAGE s398(00) WITH 'Não há registros!' DISPLAY LIKE 'E'.
+  STOP.
+ENDIF.
 
 ENDFORM.
 
@@ -354,6 +351,10 @@ FORM zf_exibe_alv_poo.
 
       lo_table->get_functions( )->set_all( abap_true ). "Ativar met codes
 
+      lo_table->get_columns( )->get_column( 'CGC' )->set_short_text( 'CNPJ' ).  "Mudar o texto curto da tabela
+      lo_table->get_columns( )->get_column( 'CGC' )->set_medium_text( 'CNPJ' ). "Mudar o texto médio da tabela
+      lo_table->get_columns( )->get_column( 'CGC' )->set_long_text( 'CNPJ' ).   "Mudar o texto longo da tabela
+                                            "CGC é o nome do campo que desejo mudar na minha t_out
 
       CREATE OBJECT lo_header. "É necessário que criemos o objeto header
 
@@ -381,8 +382,8 @@ ENDFORM.
 *&---------------------------------------------------------------------*
 FORM zf_prepara_download .
 
-  DATA: vl_dmbtr(15) TYPE c, "Crio variáveis do tipo string para receber dados numéricos
-        vl_pswbt(15) TYPE c,
+  DATA: vl_dmbtr(15)  TYPE c, "Crio variáveis do tipo string para receber dados numéricos
+        vl_pswbt(15)  TYPE c,
         vl_kbetrs(11) TYPE c,
         vl_kbetr1(11) TYPE c,
         vl_kbetr2(11) TYPE c,
@@ -581,7 +582,7 @@ FORM zf_monta_t_out .
         wa_out-sakn14 = wa_konv-sakn1.
         "wa_out-somakbetr = wa_out-somakbetr + wa_konv-kbetr. "Também posso fazer a soma aqui
       ENDIF.
-       wa_out-kbetrs = wa_out-kbetr1 + wa_out-kbetr2 + wa_out-kbetr3 + wa_out-kbetr4.  "Soma
+      wa_out-kbetrs = wa_out-kbetr1 + wa_out-kbetr2 + wa_out-kbetr3 + wa_out-kbetr4.  "Soma
     ENDLOOP.
 
 
