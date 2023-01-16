@@ -64,15 +64,15 @@ TYPES: BEGIN OF ty_vbak,
 
        BEGIN OF ty_kna1,
          kunnr TYPE kna1-kunnr,
-         name1 TYPE kna1-name1, "1 2
-         txjcd TYPE kna1-txjcd, "1 2
-         ort01 TYPE kna1-ort01, "1 2
-         pstlz TYPE kna1-pstlz, "1 2
-         regio TYPE kna1-regio, "1 2
-         stras TYPE kna1-stras, "1 2
-         ort02 TYPE kna1-ort02, "1 2
-         stcd1 TYPE kna1-stcd1, "1 2
-         stcd2 TYPE kna1-stcd2, "1 2
+         name1 TYPE kna1-name1,
+         txjcd TYPE kna1-txjcd,
+         ort01 TYPE kna1-ort01,
+         pstlz TYPE kna1-pstlz,
+         regio TYPE kna1-regio,
+         stras TYPE kna1-stras,
+         ort02 TYPE kna1-ort02,
+         stcd1 TYPE kna1-stcd1,
+         stcd2 TYPE kna1-stcd2,
          stcd3 TYPE kna1-stcd3,
        END OF ty_kna1,
 
@@ -89,45 +89,45 @@ TYPES: BEGIN OF ty_vbak,
          netwr  TYPE j_1bnflin-netwr,
        END OF ty_j_1bnflin,
 
-       BEGIN OF ty_out, "Anal: 2 , Sint: 1
-         aufnr           TYPE vbap-aufnr, "1 2
-         vbeln           TYPE vbak-vbeln, "1 2
-         posnr           TYPE vbap-posnr, "2
-         erdat           TYPE vbak-erdat, "1 2
-         matnr           TYPE vbap-matnr, "2
-         arktx           TYPE vbap-arktx, "2
-         auart           TYPE vbak-auart, "1 2
-         werks           TYPE vbap-werks, "1 2
-         lgort           TYPE vbap-lgort, "1 2
-         vkorg           TYPE vbak-vkorg, "1 2
-         vtweg           TYPE vbak-vtweg, "1 2
-         spart           TYPE vbak-spart, "1 2
-         vkbur           TYPE vbak-vkbur, "1 2
-         netwr_vbak      TYPE vbak-netwr, "1
-         netwr_vbap      TYPE vbap-netwr, "2
-         waerk           TYPE vbak-waerk, "1 2
-         kunnr           TYPE vbak-kunnr, "1 2
-         name1           TYPE kna1-name1, "1 2
-         txjcd           TYPE kna1-txjcd, "1 2
-         ort01           TYPE kna1-ort01, "1 2
-         pstlz           TYPE kna1-pstlz, "1 2
-         regio           TYPE kna1-regio, "1 2
-         stras           TYPE kna1-stras, "1 2
-         ort02           TYPE kna1-ort02, "1 2
-         stcd1           TYPE kna1-stcd1, "1 2
-         stcd2           TYPE kna1-stcd2, "1 2
-         stcd3           TYPE kna1-stcd3, "1 2
-         bstnk           TYPE vbak-bstnk, "1 2
+       BEGIN OF ty_out,
+         aufnr           TYPE vbap-aufnr,
+         vbeln           TYPE vbak-vbeln,
+         posnr           TYPE vbap-posnr,
+         erdat           TYPE vbak-erdat,
+         matnr           TYPE vbap-matnr,
+         arktx           TYPE vbap-arktx,
+         auart           TYPE vbak-auart,
+         werks           TYPE vbap-werks,
+         lgort           TYPE vbap-lgort,
+         vkorg           TYPE vbak-vkorg,
+         vtweg           TYPE vbak-vtweg,
+         spart           TYPE vbak-spart,
+         vkbur           TYPE vbak-vkbur,
+         netwr_vbak      TYPE vbak-netwr,
+         netwr_vbap      TYPE vbap-netwr,
+         waerk           TYPE vbak-waerk,
+         kunnr           TYPE vbak-kunnr,
+         name1           TYPE kna1-name1,
+         txjcd           TYPE kna1-txjcd,
+         ort01           TYPE kna1-ort01,
+         pstlz           TYPE kna1-pstlz,
+         regio           TYPE kna1-regio,
+         stras           TYPE kna1-stras,
+         ort02           TYPE kna1-ort02,
+         stcd1           TYPE kna1-stcd1,
+         stcd2           TYPE kna1-stcd2,
+         stcd3           TYPE kna1-stcd3,
+         bstnk           TYPE vbak-bstnk,
          soma_netwr      TYPE vbap-netwr, "VBAK-VBELN = VBAP-VBELN somar VBAP-NETWR de todos os itens encontrados "1
-         "KONV-KBETR de cada item (KONV-KPOSN), sendo KONV-KSCHL = #VPRS#. Onde (VBAK-NUMV = KONV-KNUMV) "2
-         lifsk           TYPE vbak-lifsk, "1 2
-         vgbel           TYPE vbrp-vgbel, "1 2
-         vbeln2          TYPE vbrp-vbeln, "1 2
-         nfenum          TYPE j_1bnfdoc-nfenum, "1 2
-         docnum          TYPE j_1bnflin-docnum, "1 2
-         nftot           TYPE j_1bnfdoc-nftot, "1
-         netwr_j_1bnflin TYPE j_1bnflin-netwr, "2
-         authdate        TYPE j_1bnfdoc-authdate, "1 2
+         soma_kbetr      TYPE konv-kbetr, "de cada item (KONV-KPOSN), sendo KONV-KSCHL = #VPRS#. Onde (VBAK-NUMV = KONV-KNUMV) "2
+         lifsk           TYPE vbak-lifsk,
+         vgbel           TYPE vbrp-vgbel,
+         vbeln2          TYPE vbrp-vbeln,
+         nfenum          TYPE j_1bnfdoc-nfenum,
+         docnum          TYPE j_1bnflin-docnum,
+         nftot           TYPE j_1bnfdoc-nftot,
+         netwr_j_1bnflin TYPE j_1bnflin-netwr,
+         authdate        TYPE j_1bnfdoc-authdate,
        END OF ty_out,
 
        BEGIN OF ty_vbrk,
@@ -139,7 +139,20 @@ TYPES: BEGIN OF ty_vbak,
        BEGIN OF ty_colect,
          vbeln TYPE vbap-vbeln,
          netwr TYPE vbak-netwr,
-       END OF ty_colect.
+       END OF ty_colect,
+
+       BEGIN OF ty_colect_2,
+         kbetr TYPE konv-kbetr, "soma
+         kposn TYPE konv-kposn, "de cada item
+         knumv TYPE konv-knumv,
+       END OF ty_colect_2,
+
+       BEGIN OF ty_konv,
+         kbetr TYPE konv-kbetr,
+         kposn TYPE konv-kposn,
+         knumv TYPE konv-knumv,
+         kschl TYPE konv-kschl,  "= 'VPRS'
+       END OF ty_konv.
 
 *&---------------------------------------------------------------------*
 *                        Tabelas Internas                              *
@@ -152,7 +165,9 @@ DATA: t_vbak      TYPE TABLE OF ty_vbak,
       t_j_1bnflin TYPE TABLE OF ty_j_1bnflin,
       t_out       TYPE TABLE OF ty_out,
       t_vbrk      TYPE TABLE OF ty_vbrk,
-      t_colect    TYPE TABLE OF ty_colect.
+      t_colect    TYPE TABLE OF ty_colect,
+      t_colect_2  TYPE TABLE OF ty_colect_2,
+      t_konv      TYPE TABLE OF ty_konv.
 
 *&---------------------------------------------------------------------*
 *                            Workareas                                 *
@@ -165,7 +180,9 @@ DATA: wa_vbak      LIKE LINE OF t_vbak,
       wa_j_1bnflin LIKE LINE OF t_j_1bnflin,
       wa_out       LIKE LINE OF t_out,
       wa_vbrk      LIKE LINE OF t_vbrk,
-      wa_colect    LIKE LINE OF t_colect.
+      wa_colect    LIKE LINE OF t_colect,
+      wa_colect_2  LIKE LINE OF t_colect_2,
+      wa_konv      LIKE LINE OF  t_konv.
 
 *&---------------------------------------------------------------------*
 *                              Variãveis                               *
@@ -265,8 +282,8 @@ FORM zf_select_sintetico.
           spart IN s_spart AND
           vkbur IN s_vkbur AND
           kunnr IN s_kunnr AND
-          bstnk IN s_bstnk. "AND
-  " lifsk = p_bloque AND  "Aqui não deu certo. #Dúvida     "VBAK-LIFSK = Ordem de venda bloqueada? informado na tela de seleção
+          bstnk IN s_bstnk.
+  " lifsk = p_bloque AND     "VBAK-LIFSK = Ordem de venda bloqueada? informado na tela de seleção
   " lifsk = p_desblo.
 
 *******************************************************
@@ -303,6 +320,7 @@ FORM zf_select_sintetico.
             "aufnr <> '' AND
             werks IN s_werks AND
             lgort IN s_lgort.
+
 * Delete para ganho de performance no meu SELECT
     DELETE t_vbap WHERE aufnr = ''.
 
@@ -317,28 +335,20 @@ FORM zf_select_sintetico.
             vgbel IN s_vgbel AND
             vbeln IN s_vbeln2.
 
-    "LOOP AT t_vbrp INTO wa_vbrp.  "Loop para fazer a modificação no meu campo auxiliar
-    " wa_vbrp-vbeln_aux = wa_vbrp-vbeln.
-    " MODIFY t_vbrp FROM wa_vbrp TRANSPORTING vbeln_aux.
-    " ENDLOOP.
-
-    "VBRP-VBELN = Fatura informado na tela de seleção (VBRP-VBELN = VBRK-VBELN) onde (VBRK-SFAKN = ' ') AND (VBRK-FKSTO = ' ')  #Dúvida
-    "Fiz conforme o select abaixo, porém não sei se está correto
     SELECT vbeln
            sfakn
            fksto
       FROM vbrk
       INTO TABLE t_vbrk
       FOR ALL ENTRIES IN t_vbrp
-      WHERE vbeln = t_vbrp-vbeln. "AND "Esse trecho, inverti a ordem de (VBRP-VBELN = VBRK-VBELN)
-    " sfakn = ' ' AND "Performance
+      WHERE vbeln = t_vbrp-vbeln.
+    " sfakn = ' ' AND "Performance   "Posso fazer assim, mas fiz com o DELETE  a baixo para ganho de performance
     " fksto = ' '.
 
 * delete para ganho de performance no meu select
     DELETE t_vbrk WHERE ( sfakn <> '' )
                    AND ( fksto <> '' ).
 
-    "Checar tabela###########################
     IF t_vbrk IS NOT INITIAL.
 
       SELECT kunnr
@@ -416,9 +426,13 @@ FORM  zf_select_analitico.
           spart IN s_spart AND
           vkbur IN s_vkbur AND
           kunnr IN s_kunnr AND
-          bstnk IN s_bstnk. "AND
-  "lifsk = p_bloque AND  **************************************************
-  "lifsk = p_desblo.
+          bstnk IN s_bstnk.
+
+  IF p_bloque = 'X' AND p_desblo = ''.
+    DELETE t_vbak WHERE lifsk IS NOT INITIAL.
+  ELSEIF p_bloque = ' ' AND p_desblo = 'X'.
+    DELETE t_vbak WHERE lifsk IS INITIAL.
+  ENDIF.
 
   IF t_vbak IS NOT INITIAL.
 
@@ -464,18 +478,16 @@ FORM  zf_select_analitico.
             vgbel IN s_vgbel AND
             vbeln IN s_vbeln2.
 
-    SELECT vbeln "************************************************************************
+    SELECT vbeln
            sfakn
            fksto
       FROM vbrk
      INTO TABLE t_vbrk
      FOR ALL ENTRIES IN t_vbrp
-     WHERE vbeln = t_vbrp-vbeln AND
-           sfakn = ' ' AND
-           fksto = ' '.
-    "onde (VBRK-SFAKN = ' ') AND (VBRK-FKSTO = ' ') *************************************Mesma dúvida de lá de cima
-    " DELETE t_vbrk WHERE ( sfakn <> '' )
-    "                AND ( fksto <> '' ).
+     WHERE vbeln = t_vbrp-vbeln.
+
+     DELETE t_vbrk WHERE ( sfakn <> '' )
+                    AND ( fksto <> '' ).
 
     LOOP AT t_vbrp INTO wa_vbrp.  "Loop para fazer a modificação no meu campo auxiliar
       wa_vbrp-vbeln_aux = wa_vbrp-vbeln.
@@ -500,6 +512,16 @@ FORM  zf_select_analitico.
       FOR ALL ENTRIES IN t_j_1bnflin
       WHERE docnum = t_j_1bnflin-docnum AND
             nfenum IN s_nfenum.
+
+    SELECT kbetr
+           kposn
+           knumv
+           kschl
+      FROM konv
+      INTO TABLE t_konv
+       FOR ALL ENTRIES IN t_vbak
+       WHERE knumv = t_vbak-knumv AND
+             kschl = 'VPRS'.
 
   ELSE.
     MESSAGE s398(00) WITH 'Não há registros!' DISPLAY LIKE 'E'.
@@ -569,7 +591,8 @@ ENDFORM.
 *&---------------------------------------------------------------------*
 FORM zf_monta_t_out .
 
-  PERFORM z_soma.
+  PERFORM: z_soma,
+           z_soma_analitico.
 
   LOOP AT t_vbak INTO wa_vbak. "Loop na tabela mestre #Principal #Do primeiro SELECT
     "No READ a chave deve ser a mesma da condicional do SELECT
@@ -605,6 +628,12 @@ FORM zf_monta_t_out .
       IF sy-subrc IS INITIAL.
         wa_out-soma_netwr = wa_colect-netwr.
       ENDIF.
+
+      READ TABLE t_colect_2 INTO wa_colect_2 WITH KEY knumv = wa_vbak-knumv.
+      IF sy-subrc IS INITIAL.
+        wa_out-soma_kbetr = wa_colect_2-kbetr.
+      ENDIF.
+
     ENDIF.
 
 
@@ -645,9 +674,6 @@ FORM zf_monta_t_out .
       "WRITE wa_kna1-stcd1 USING EDIT MASK '__.___.___/____-__' TO wa_out-stcd1.  "Máscara para o campo do cnpj
     ENDIF.
 
-
-    "Soma
-
     APPEND wa_out TO t_out.
     CLEAR: wa_out,
            wa_vbak,
@@ -672,6 +698,22 @@ FORM z_soma .
 
     COLLECT wa_colect INTO t_colect.
     CLEAR wa_colect.
+  ENDLOOP.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*&      Form  Z_SOMA_analitico
+*&---------------------------------------------------------------------*
+FORM z_soma_analitico .
+
+  LOOP AT t_konv INTO wa_konv.
+    wa_colect_2-kbetr = wa_konv-kbetr.
+    wa_colect_2-kposn = wa_konv-kposn.
+    wa_colect_2-knumv = wa_konv-knumv.
+
+    COLLECT wa_colect_2 INTO t_colect_2.
+    CLEAR wa_colect_2.
   ENDLOOP.
 
 ENDFORM.
