@@ -712,7 +712,7 @@ FORM zf_monta_t_out_analitico .
     wa_out-netwr_vbap = wa_vbap-netwr.
     " ENDIF.
 
-    READ TABLE t_vbak INTO wa_vbak WITH KEY vbeln = wa_vbap-vbeln. """""""""""""""""""""""""""""""""""""""""""""""'
+    READ TABLE t_vbak INTO wa_vbak WITH KEY vbeln = wa_vbap-vbeln. 
     IF sy-subrc IS INITIAL.
       wa_out-vbeln = wa_vbak-vbeln.
       wa_out-posnr = wa_vbap-posnr.
@@ -747,11 +747,6 @@ FORM zf_monta_t_out_analitico .
     IF sy-subrc IS INITIAL.
       wa_out-vgbel = wa_vbrp-vgbel.
       wa_out-vbeln2 = wa_vbrp-vbeln.
-    ENDIF.
-
-    READ TABLE t_vbrk INTO wa_vbrk WITH KEY vbeln = wa_vbrp-vbeln.
-    IF sy-subrc IS INITIAL.
-
     ENDIF.
 
     READ TABLE t_j_1bnflin INTO wa_j_1bnflin WITH KEY refkey = wa_vbrp-vbeln_aux.
